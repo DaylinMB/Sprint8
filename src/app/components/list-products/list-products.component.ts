@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'; 
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-list-products',
@@ -17,11 +18,21 @@ export class ListProductsComponent implements OnInit {
     { id: 2, name: 'Mause', description: 'Mauise inalambrico', price: 27, stock: 50 }
   ]
 
-  constructor() {}
+  constructor( private _productService: ProductService) {}
 
   ngOnInit(): void {
-    
+    this.getListProducts();
+  }
+
+  getListProducts() {
+    this._productService.getListProducts().subscribe((data) => {
+      console.log(data);
+    })
   }
 
 
 }
+
+
+
+
