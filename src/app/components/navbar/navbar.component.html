@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">DayAPP</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a (click)="navigateTo('home')" class="nav-link text-white">Home</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="navigateTo('calendar')" class="nav-link text-white">Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="navigateTo('graficos')" class="nav-link text-white">Graphic</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="navigateTo('mapa')" class="nav-link text-white">Map</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

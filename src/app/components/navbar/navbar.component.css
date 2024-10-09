@@ -1,0 +1,9 @@
+.nav-link {
+    cursor: pointer; /* Cambia el cursor a un puntero al pasar el mouse */
+  }
+  
+.nav-link:hover, .nav-link:focus {
+    background-color: rgba(255, 255, 255, 0.2); /* Un color blanco semitransparente */
+    border-radius: 5px; /* Esquinas redondeadas */
+  }
+  
