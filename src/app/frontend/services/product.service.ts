@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../enviroments/enviroment';
 import { Observable } from 'rxjs';
-import { Product } from '../interfaces/product'; 
+import { Product } from '../interfaces/product';
+import {
+  getProduct,
+  updateProduct,
+} from '../../../../backend/src/controllers/producto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ProductService {
   private myAppUrl: string;
   private myApiUrl: string;
@@ -22,10 +25,21 @@ export class ProductService {
   }
 
   deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void> (`${this.myAppUrl}${this.myApiUrl}${id}`);
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}${id}`);
   }
 
-  saveProduct(product: Product): Observable<void>  { 
-    return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, product)
+  saveProduct(product: Product): Observable<void> {
+    return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, product);
+  }
+
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.myAppUrl}${this.myApiUrl}${id}`);
+  }
+
+  updateProduct(id: number, product: Product): Observable<void> {
+    return this.http.put<void>(
+      `${this.myAppUrl}${this.myApiUrl}${id}`,
+      product
+    );
   }
 }
