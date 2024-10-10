@@ -25,57 +25,65 @@ export const deleteProduct = async (req: Request, res: Response) => {
   const product = await Producto.findByPk(id);
 
   if (!product) {
-    res.status(404).json({
-      msg: ` No existe un producto con el id ${id}`,
+    return res.status(404).json({
+      msg: `No existe un producto con el id ${id}`,
     });
-  } else {
+  } 
+  
+  try {
     await product.destroy();
-    res.json({
-      msg: ` El producto fue eliminado con exito!`,
+    return res.json({
+      msg: `El producto fue eliminado con éxito!`,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      msg: 'Error al eliminar el producto. Por favor, inténtelo de nuevo o contacte al soporte.',
     });
   }
-
-  res.json({
-    msg: 'delete Product',
-    id,
-  });
 };
+
 
 export const postProduct = async (req: Request, res: Response) => {
   const { body } = req;
 
   try {
-      await Producto.create(body);
+    await Producto.create(body);
 
-      res.json({
-        msg: `El producto fue agregado con exito!`
-      })
+    res.json({
+      msg: `El producto fue agregado con exito!`,
+    });
   } catch (error) {
     console.log(error);
     res.json({
-        msg: `Oops! Ha ocurrido un error, comuniquese con soporte.`
-      })
+      msg: `Oops! Ha ocurrido un error, comuniquese con soporte.`,
+    });
   }
-
- 
 };
 
 export const updateProduct = async (req: Request, res: Response) => {
   const { body } = req;
   const { id } = req.params;
 
-  const product = await Producto.findByPk(id)
-  if(product) {
+  const product = await Producto.findByPk(id);
 
-    await product.update(body);
-    res.status(404).json({
+  try {
+    if (product) {
+      await product.update(body);
+      res.json({
         msg: ` El producto fue actualizado con exito`,
       });
-
     } else {
       res.status(404).json({
-          msg: ` No existe un producto con el id ${id}`,
-        });
-     }
+        msg: ` No existe un producto con el id ${id}`,
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.json({
+      msg: `Oops! Ha ocurrido un error, comuniquese con soporte.`,
+    })
+  }
 
 };

@@ -9,14 +9,14 @@ class Server {
 
   constructor() {
     this.app = express();
-    this.port = process.env.PORT || '3001';
-    this.listen();
-    this.routes();
+    this.port = process.env['PORT'] || '3001';
     this.midlewares();
+    this.routes();
+    this.listen();
     this.dbConnect();
   }
 
-  listen() {
+  listen() { 
     this.app.listen(this.port, () => {
       console.log(`Aplicación corriendo en el puerto ${this.port}`);
     });
@@ -28,15 +28,16 @@ class Server {
         msg: 'API working',
       });
     });
-    this.app.use('/api/productos', routeProducto);
+    this.app.use('/api/productos/', routeProducto);
   }
 
   midlewares() {
+    //cors
+    this.app.use(cors(/*{ origin: 'http://localhost:4200/'}*/));
+
     //Parsear al body
     this.app.use(express.json());
 
-    //cor
-    this.app.use(cors());
   }
 
   async dbConnect() {
