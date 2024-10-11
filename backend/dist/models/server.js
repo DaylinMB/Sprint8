@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const producto_1 = __importDefault(require("../routes/producto"));
+const charts_1 = __importDefault(require("../routes/charts"));
 const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
@@ -37,6 +38,7 @@ class Server {
             });
         });
         this.app.use('/api/productos/', producto_1.default);
+        this.app.use('/api/charts/', charts_1.default);
     }
     midlewares() {
         //cors

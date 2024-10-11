@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import routeProducto from '../routes/producto';
+import routeCharts from '../routes/charts';
 import db from '../db/connection';
 
 class Server {
@@ -29,6 +30,7 @@ class Server {
       });
     });
     this.app.use('/api/productos/', routeProducto);
+    this.app.use('/api/charts/', routeCharts);
   }
 
   midlewares() {

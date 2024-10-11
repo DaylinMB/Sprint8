@@ -3,10 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../enviroments/enviroment';
 import { Observable } from 'rxjs';
 import { Product } from '../interfaces/product';
-import {
-  getProduct,
-  updateProduct,
-} from '../../../../backend/src/controllers/producto';
 
 @Injectable({
   providedIn: 'root',
