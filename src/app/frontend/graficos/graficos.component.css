@@ -1,0 +1,8 @@
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los gráficos horizontalmente */
+}
+canvas {
+  max-width: 100%; /* Asegura que los gráficos no excedan el ancho del contenedor */
+}

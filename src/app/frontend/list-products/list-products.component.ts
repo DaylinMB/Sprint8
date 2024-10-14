@@ -17,7 +17,10 @@ export class ListProductsComponent implements OnInit {
   listProduct: Product[] = [];
   loading: boolean = false;
 
-  constructor(private _productService: ProductService, private toastr: ToastrService) {}
+  constructor(
+    private _productService: ProductService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getListProducts();
@@ -28,7 +31,7 @@ export class ListProductsComponent implements OnInit {
 
     this._productService.getListProducts().subscribe((data: Product[]) => {
       this.listProduct = data;
-      this.loading = false;
+      this.loading = false; 
     });
   }
 

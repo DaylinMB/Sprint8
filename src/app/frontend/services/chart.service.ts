@@ -7,6 +7,7 @@ import { Chart } from '../interfaces/chart';
 @Injectable({
   providedIn: 'root',
 })
+
 export class ChartService {
   private myAppUrl: string;
   private myApiUrl: string;

@@ -7,6 +7,7 @@ import { Product } from '../interfaces/product';
 @Injectable({
   providedIn: 'root',
 })
+
 export class ProductService {
   private myAppUrl: string;
   private myApiUrl: string;

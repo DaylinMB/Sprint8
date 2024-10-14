@@ -1,1 +1,23 @@
-<p>full-calendar works!</p>
+<div class="container">
+  <full-calendar class="mt-4" [options]="calendarOptions"></full-calendar>
+
+  <!-- Modal para agregar un evento -->
+  <ng-template #addEventModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Agregar Evento</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <label for="eventName">Nombre del Evento</label>
+      <input type="text" [(ngModel)]="eventName" id="eventName" class="form-control" />
+      
+      <label for="eventDate">Fecha del Evento</label>
+      <input type="date" [(ngModel)]="eventDate" id="eventDate" class="form-control" />
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="createEvent(modal)">Agregar</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+    </div>
+  </ng-template>
+  
+</div>

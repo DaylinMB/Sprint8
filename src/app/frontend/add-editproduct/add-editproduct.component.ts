@@ -1,30 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Product } from '../interfaces/product';
 import { ProductService } from '../services/product.service';
 import { ProgressBarComponent } from '../shared/progress-bar/progress-bar.component';
 import { ToastrService } from 'ngx-toastr';
-import { getProduct } from '../../../../backend/src/controllers/producto';
 
 @Component({
   selector: 'app-add-editproduct',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    ReactiveFormsModule,
-    ProgressBarComponent,
-  ],
+  imports: [ CommonModule, RouterLink, ReactiveFormsModule, ProgressBarComponent ],
   templateUrl: './add-editproduct.component.html',
   styleUrl: './add-editproduct.component.css',
 })
+
+
 export class AddEditproductComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;

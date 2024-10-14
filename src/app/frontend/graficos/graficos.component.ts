@@ -8,6 +8,8 @@ import { ChartService } from '../services/chart.service';
   templateUrl: './graficos.component.html',
   styleUrl: './graficos.component.css',
 })
+
+
 export class GraficosComponent {
   public chart: any;
   public chart2: any;
