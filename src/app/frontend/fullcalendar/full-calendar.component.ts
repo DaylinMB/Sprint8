@@ -9,7 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { Calendar } from '../interfaces/calendar';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { EventInput } from '@fullcalendar/core'; // Asegúrate de importar EventInput
 
 @Component({
@@ -24,15 +24,14 @@ export class FullCalendarComponent implements OnInit {
   events: Calendar[] = [];
   eventName: string = '';
   eventDate: string = '';
+  id: string = '';
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin, interactionPlugin],
     selectable: true,
     dateClick: (arg) => this.openCreateEventModal(arg),
-    select: (selectionInfo) => this.openCreateEventModal(selectionInfo),
-
-    events: this.events,
+    events: [],
 
     headerToolbar: {
       left: 'prev,next',
@@ -44,8 +43,7 @@ export class FullCalendarComponent implements OnInit {
   constructor(
     private _calendarService: CalendarService,
     private toastr: ToastrService,
-    private modalService: NgbModal,
-    private router: Router
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -53,14 +51,18 @@ export class FullCalendarComponent implements OnInit {
   }
 
   getDataAndCreateCalendar(): void {
-    this._calendarService.getEvents().subscribe((response: EventInput[]) => {
-      this.events = response as Calendar[]; // Cast a Calendar[] si es necesario
-      this.createCalendar();
+    this._calendarService.getEvents().subscribe((response) => {
+      this.events = response as Calendar[];
+      this.updateCalendarEvents();
     });
   }
 
-  createCalendar() {
-    this.calendarOptions.events = this.events;
+  updateCalendarEvents(): void {
+    this.calendarOptions.events = this.events.map((event) => ({
+      title: event.title,
+      start: event.start,
+      end: event.end,
+    }));
   }
 
   openCreateEventModal(arg: any) {
@@ -71,19 +73,23 @@ export class FullCalendarComponent implements OnInit {
   }
 
   createEvent(modal: any) {
-    if (this.eventName) {
+    if (this.eventName && this.eventDate) {
       const newEvent: Calendar = {
+        id: '',
         title: this.eventName,
         start: this.eventDate,
-        end: this.eventDate, // Si deseas establecer una fecha de finalización
+        end: this.eventDate,
       };
 
       this._calendarService.addEvent(newEvent).subscribe(() => {
         this.toastr.success(
-          `El evento ${newEvent.title} fue creado con éxito`,
-          `Evento Registrado`
+          `El evento ${newEvent.title} fue creado con éxito,
+          Evento Registrado`
         );
-        this.router.navigate(['/']);
+
+        this.events.push(newEvent);
+        this.updateCalendarEvents();
+
         modal.close();
         this.eventName = '';
         this.eventDate = '';

@@ -1,8 +1,7 @@
 <div class="container">
   <full-calendar class="mt-4" [options]="calendarOptions"></full-calendar>
 
-  <!-- Modal para agregar un evento -->
-  <ng-template #addEventModal let-modal>
+  <ng-template #createEventModal let-modal>
     <div class="modal-header">
       <h4 class="modal-title">Agregar Evento</h4>
       <button type="button" class="close" (click)="modal.dismiss('Cross click')">&times;</button>
@@ -19,5 +18,4 @@
       <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
     </div>
   </ng-template>
-  
 </div>

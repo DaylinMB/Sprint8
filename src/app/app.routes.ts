@@ -13,6 +13,7 @@ export const routes: Routes = [
     { path: 'delete/:id', component: AddEditproductComponent },
     { path: 'home', component: HomeComponent },
     { path: 'calendar', component: FullCalendarComponent },
+    { path: 'addEvent', component: FullCalendarComponent },
     { path: 'graficos', component: GraficosComponent },
     { path: 'mapa', component: MapaComponent },
     { path: '**', redirectTo: '', pathMatch: "full" },
