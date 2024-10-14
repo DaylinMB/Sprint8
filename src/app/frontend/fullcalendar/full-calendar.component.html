@@ -4,39 +4,70 @@
   <ng-template #createEventModal let-modal>
     <div class="modal-header">
       <h4 class="modal-title">Agregar Evento</h4>
-      <button type="button" class="close" (click)="modal.dismiss('Cross click')">&times;</button>
+      <button
+        type="button"
+        class="close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        &times;
+      </button>
     </div>
     <div class="modal-body">
       <label for="eventName">Nombre del Evento</label>
-      <input type="text" [(ngModel)]="eventName" id="eventName" class="form-control" />
-      
+      <input
+        type="text"
+        [(ngModel)]="eventName"
+        id="eventName"
+        class="form-control"
+      />
+
       <label for="eventDate">Fecha del Evento</label>
-      <input type="date" [(ngModel)]="eventDate" id="eventDate" class="form-control" />
+      <input
+        type="date"
+        [(ngModel)]="eventDate"
+        id="eventDate"
+        class="form-control"
+      />
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="createEvent(modal)">Agregar</button>
-      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="createEvent(modal)"
+      >
+        Agregar
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
+        Cerrar
+      </button>
     </div>
   </ng-template>
 
-
-
-
-  <!------------------------------------------------------->
   <!-- Modal para mostrar detalles del evento -->
-<ng-template #eventDetailsModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Detalles del Evento</h4>
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')">&times;</button>
-  </div>
-  <div class="modal-body">
-    <p><strong>Título:</strong> {{ selectedEvent?.title }}</p>
-    <p><strong>Fecha de Inicio:</strong> {{ selectedEvent?.start | date }}</p>
-    <p><strong>Fecha de Fin:</strong> {{ selectedEvent?.end | date }}</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
-  </div>
-</ng-template>
+  <ng-template #eventDetailsModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Detalles del Evento</h4>
+      <button
+        type="button"
+        class="close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        &times;
+      </button>
+    </div>
 
+    <div class="modal-body" *ngIf="selectedEvent">
+      <p><strong>Título:</strong> {{ selectedEvent.title }}</p>
+      <p><strong>Fecha de Inicio:</strong> {{ selectedEvent.start | date }}</p>
+      <p><strong>Fecha de Fin:</strong> {{ selectedEvent.end | date }}</p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="deleteEvent(modal)">Eliminar evento</button>
+
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
+        Cerrar
+      </button>
+    </div>
+  </ng-template>
 </div>

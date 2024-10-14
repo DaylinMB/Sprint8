@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
 import { Calendar } from '../interfaces/calendar';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-full-calendar',
   standalone: true,
@@ -25,8 +24,12 @@ export class FullCalendarComponent implements OnInit {
   eventName: string = '';
   eventDate: string = '';
   id: string = '';
-  selectedEvent: Calendar | null = null; // Añadir esta línea
-
+  selectedEvent: {
+    id: string;
+    title: string;
+    start: string;
+    end: string;
+  } | null = null;
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -46,7 +49,7 @@ export class FullCalendarComponent implements OnInit {
   constructor(
     private _calendarService: CalendarService,
     private toastr: ToastrService,
-    private modalService: NgbModal
+    public modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -84,34 +87,56 @@ export class FullCalendarComponent implements OnInit {
         end: this.eventDate,
       };
 
-      this._calendarService.addEvent(newEvent).subscribe((response: Calendar) => {
-        this.toastr.success(
-          `El evento ${newEvent.title} fue creado con éxito,
-          Evento Registrado`
-        );
+      this._calendarService
+        .addEvent(newEvent)
+        .subscribe((response: Calendar) => {
+          this.toastr.success(`El evento ${newEvent.title} fue creado con éxito,
+          Evento Registrado`);
 
-        newEvent.id = response.id;
+          newEvent.id = response.id;
 
-        this.events.push(newEvent);
-        this.updateCalendarEvents();
+          this.events.push(newEvent);
+          this.updateCalendarEvents();
 
-        modal.close();
-        this.eventName = '';
-        this.eventDate = '';
-      });
+          modal.close();
+          this.eventName = '';
+          this.eventDate = '';
+        });
     }
   }
 
   handleEventClick(info: any) {
-    // Almacenar el evento seleccionado
     this.selectedEvent = {
-      id: info.event.id,
-      title: info.event.title,
-      start: info.event.start.toISOString(),
-      end: info.event.end ? info.event.end.toISOString() : info.event.start.toISOString(),
+        id: info.event.id.toString(),
+        title: info.event.title,
+        start: info.event.start.toISOString(),
+        end: info.event.end ? info.event.end.toISOString() : info.event.start.toISOString(),
     };
-
-    // Abrir el modal de detalles del evento
+    console.log('Evento seleccionado:', this.selectedEvent);
     this.modalService.open(this.eventDetailsModal);
+}
+
+
+
+  deleteEvent(modal: any) {
+    if (this.selectedEvent && this.selectedEvent.id) {
+        this._calendarService.deleteEvent(this.selectedEvent.id).subscribe({
+            next: () => {
+                this.events = this.events.filter(event => event.id !== this.selectedEvent!.id);
+                this.updateCalendarEvents();
+                this.toastr.success(`El evento ${this.selectedEvent!.title} fue eliminado con éxito`);
+                this.modalService.dismissAll();
+            },
+            error: (error) => {
+                console.error('Error al eliminar el evento:', error);
+                this.toastr.error(`Error al eliminar el evento: ${error.message}`);
+            }
+        });
+    } else {
+        this.toastr.error('No se puede eliminar el evento porque no está seleccionado');
+    }
   }
+
+
+
 }
