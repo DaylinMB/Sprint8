@@ -45,18 +45,3 @@ export class ListProductsComponent implements OnInit {
   }
   
 }
-
-
-// deleteProduct(id: number) {
-//   this.loading = true;
-//   this._productService.deleteProduct(id).subscribe(
-//     () => {
-//       this.getListProducts();
-//     },
-//     (error) => {
-//       this.loading = false;
-//       console.error('Error al eliminar el producto:', error);
-//       alert('Ocurrió un error al eliminar el producto. Verifica la consola para más detalles.');
-//     }
-//   );
-// }

@@ -68,6 +68,7 @@ export class FullCalendarComponent implements OnInit {
       title: event.title,
       start: event.start,
       end: event.end,
+      id: event.id,
     }));
   }
 

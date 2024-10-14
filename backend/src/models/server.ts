@@ -3,6 +3,7 @@ import cors from 'cors';
 import routeProducto from '../routes/producto';
 import routeCharts from '../routes/charts';
 import routeCalendar from '../routes/calendar';
+import routeMarker from '../routes/marker';
 import db from '../db/connection';
 
 class Server {
@@ -18,7 +19,7 @@ class Server {
     this.dbConnect();
   }
 
-  listen() { 
+  listen() {
     this.app.listen(this.port, () => {
       console.log(`Aplicación corriendo en el puerto ${this.port}`);
     });
@@ -33,7 +34,7 @@ class Server {
     this.app.use('/api/productos/', routeProducto);
     this.app.use('/api/charts/', routeCharts);
     this.app.use('/api/calendar/', routeCalendar);
-
+    this.app.use('/api/markers/', routeMarker);
   }
 
   midlewares() {
@@ -42,7 +43,6 @@ class Server {
 
     //Parsear al body
     this.app.use(express.json());
-
   }
 
   async dbConnect() {
