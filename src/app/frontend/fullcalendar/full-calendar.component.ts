@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FullCalendarComponent implements OnInit {
   @ViewChild('createEventModal') createEventModal: any;
-  @ViewChild('eventDetailsModal') eventDetailsModal: any; // Añadir esta línea
+  @ViewChild('eventDetailsModal') eventDetailsModal: any; 
   events: Calendar[] = [];
   eventName: string = '';
   eventDate: string = '';
@@ -54,6 +54,7 @@ export class FullCalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataAndCreateCalendar();
+
   }
 
   getDataAndCreateCalendar(): void {
@@ -61,6 +62,7 @@ export class FullCalendarComponent implements OnInit {
       this.events = response as Calendar[];
       this.updateCalendarEvents();
     });
+    
   }
 
   updateCalendarEvents(): void {
@@ -70,11 +72,12 @@ export class FullCalendarComponent implements OnInit {
       end: event.end,
       id: event.id,
     }));
+  
   }
 
   openCreateEventModal(arg: any) {
     if (arg.start) {
-      this.eventDate = arg.start.toISOString().split('T')[0];
+      this.eventDate = arg.date.toISOString().split('T')[0]; 
     }
     this.modalService.open(this.createEventModal);
   }
