@@ -11,7 +11,7 @@ export const routes: Routes = [
     { path: 'add', component: AddEditproductComponent },
     { path: 'edit/:id', component: AddEditproductComponent },
     { path: 'delete/:id', component: AddEditproductComponent },
-    { path: 'home', component: HomeComponent },
+    { path: '', component: HomeComponent },
     { path: 'calendar', component: FullCalendarComponent },
     { path: 'addEvent', component: FullCalendarComponent },
     { path: 'graficos', component: GraficosComponent },
