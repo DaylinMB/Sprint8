@@ -2,10 +2,11 @@
 
 <div *ngIf="!loading" class="row mt-4">
   <div class="col-lg-4 offset-lg-4">
-    <div class="card text-white bg-secondary mb-3" style="max-width: 25rem">
-      <div class="card-header text-center">{{operation}} producto</div>
+    <div class="card text-blue bg-secondary mb-3" style="max-width: 25rem">
+      <div class="card-header text-center">{{ operation }} producto</div>
       <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="addProduct()">
+          <label>Ingrese el nombre del producto</label>
           <input
             formControlName="name"
             type="text"
@@ -20,6 +21,7 @@
           >
             El campo nombre es <strong>requrido</strong>
           </span>
+          <label>descrición del producto</label>
           <input
             formControlName="description"
             type="text"
@@ -34,6 +36,7 @@
           >
             El campo description es <strong>requrido</strong>
           </span>
+          <label>Precio del producto</label>
           <input
             formControlName="price"
             type="number"
@@ -48,6 +51,8 @@
           >
             El campo price es <strong>requrido</strong>
           </span>
+          <br />
+          <label>Stock del producto</label>
           <input
             formControlName="stock"
             type="number"
